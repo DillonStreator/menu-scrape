@@ -6,8 +6,9 @@ Scrape menus from websites
 ## Support
 
 - [x] Grubhub
-- [ ] Door Dash
+- [ ] DoorDash
 - [ ] Uber Eats
+- [ ] Postmates
 
 ## Use
 
