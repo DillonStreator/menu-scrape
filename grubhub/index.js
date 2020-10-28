@@ -1,12 +1,12 @@
 const { parsePrice } = require("../utils");
 
 const $$_SECTION = "ghs-restaurant-menu-section";
-const $$_CATEGORY = "h3[itemprop='name']";
-const $$_PRODUCT = "ghs-restaurant-menu-item";
-const $$_NAME = "a[itemprop='name']";
-const $$_DESCRIPTION = "p[itemprop='description']";
-const $$_PRICE = "span[itemprop='price']";
-const $$_IMAGE = "img.menuItemNew-imageMagazine-img";
+const $$_CATEGORY = "h3.menuSection-title";
+const $$_PRODUCT = ".menuItem";
+const $$_NAME = "a.menuItem-name";
+const $$_DESCRIPTION = "p[data-testId='description']";
+const $$_PRICE = "span[data-testId='menu-item-price']";
+const $$_IMAGE = "img[data-testId='lazy-image']";
 
 module.exports = async ({ page } = {}) => {
     try {
@@ -35,12 +35,12 @@ module.exports = async ({ page } = {}) => {
                 } catch (error) { }
                 if (image) {
                     await productContainer.click();
-                    await page.waitFor("ghs-menu-item-add");
-                    image = await page.$eval("ghs-menu-item-add header", e => e.style.backgroundImage.slice(5).slice(0, -2));
+                    await page.waitFor("ghs-menu-item-add form");
+                    image = await page.$eval("ghs-menu-item-add form header", e => e.style.backgroundImage.slice(5).slice(0, -2));
                     await page.evaluate(() => {
-                        document.querySelector("ghs-menu-item-add header button").click();
+                        document.querySelector("ghs-menu-item-add form header button").click();
                     });
-                    await page.waitFor("ghs-menu-item-add", { hidden: true });
+                    await page.waitFor("ghs-menu-item-add form", { hidden: true });
                 }
 
                 if (productMap[name]) {
